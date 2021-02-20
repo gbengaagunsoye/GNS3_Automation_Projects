@@ -43,4 +43,25 @@ for switch in switches:
     syslog_output = connection.send_command("show logging last 1 day")
     output_list.append(syslog_output)
 
-output_map = 
+pprint(output_list)
+print(len(output_list))
+
+
+output_map = {}
+
+for output in output_list:
+    hostname_regex = re.findall(r".+\d\d:\d\d:\d\d\s(.+?)\s", output)
+    hostname = hostname_regex[0]
+
+    output_lines = output.split("\n")
+    pprint(output_lines)
+
+    lldp_lines = []
+
+    for line in output_lines:
+        if re.search(r"LLDP", line, re.I) and re.search(r"neighbor", line, re.I):
+            lldp_lines.append(line + "\n")
+
+    output_map[hostname] = lldp_lines
+
+    pprint(output_map)
