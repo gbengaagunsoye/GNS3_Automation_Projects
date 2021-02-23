@@ -1,0 +1,12 @@
+A1
+Feb 23 02:29:45 A1 Lldp: %LLDP-5-NEIGHBOR_NEW: LLDP neighbor with chassisId 0c97.7f83.c58e and portId "Ethernet1" added on interface Ethernet3
+
+
+A2
+Feb 23 02:29:43 A2 Lldp: %LLDP-5-NEIGHBOR_NEW: LLDP neighbor with chassisId 0c97.7f02.922d and portId "Ethernet2" added on interface Ethernet1
+Feb 23 02:29:44 A2 Lldp: %LLDP-5-NEIGHBOR_NEW: LLDP neighbor with chassisId 0c97.7f83.c58e and portId "Ethernet2" added on interface Ethernet2
+
+
+A3
+
+

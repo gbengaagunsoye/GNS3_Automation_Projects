@@ -1,6 +1,7 @@
 from netmiko import ConnectHandler
 from datetime import datetime
 from pprint import pprint
+import re
 
 with open("ip.txt") as f:
     ips = f.readlines()
@@ -51,6 +52,7 @@ output_map = {}
 
 for output in output_list:
     hostname_regex = re.findall(r".+\d\d:\d\d:\d\d\s(.+?)\s", output)
+    # pprint(hostname_regex)
     hostname = hostname_regex[0]
 
     output_lines = output.split("\n")
@@ -64,4 +66,10 @@ for output in output_list:
 
     output_map[hostname] = lldp_lines
 
-    pprint(output_map)
+# pprint(output_map)
+
+with open("lldp_{}".format(datetime.now().strftime("%Y-%m-%d-%H-%M")), "w") as f:
+    for entry in output_map.items():
+        f.write(entry[0] + "\n")
+        f.writelines(entry[1])
+        f.write("\n\n")
