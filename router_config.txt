@@ -1,0 +1,41 @@
+dditional configuration for the Arista A3 and A4 devices
+
+Additional configuration on Arista A3 for testing purposes
+
+    A3(config)#int ethernet 4
+    A3(config-if-Et2)#ip address 192.168.34.3 255.255.255.0
+    A3(config-if-Et2)#no switchport
+    A3(config-if-Et2)#no shutdown
+     
+    A3(config)#router ospf 1
+    A3(config-router-ospf)#network 192.168.34.0 0.0.0.255 area 0
+     
+    A3(config-router-ospf)#copy run start
+
+
+
+Necessary configuration on Arista A4 for testing purposes
+
+
+    localhost>enable
+    localhost#conf t
+    localhost(config)#hostname A4
+    A4(config)#zerotouch disable
+     
+    A4(config)#int ethernet 4
+    A4(config-if-Et2)#ip address 192.168.34.4 255.255.255.0
+    A4(config-if-Et2)#no switchport
+    A4(config-if-Et2)#no shutdown
+     
+    A4(config)#int loopback 1
+    A4(config-if-Lo1)#ip address 4.4.4.4 255.255.255.0
+     
+    A4(config)#snmp-server group python v3 priv
+    A4(config)#snmp-server user mihai python v3 auth sha shapass1234 priv aes aespass1234
+     
+    A4(config)#ip routing
+    A4(config)#router ospf 1
+    A4(config-router-ospf)#network 192.168.34.0 0.0.0.255 area 0
+    A4(config-router-ospf)#network 4.4.4.4 0.0.0.0 area 0
+     
+    A4(config)#copy run start
