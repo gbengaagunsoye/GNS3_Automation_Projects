@@ -47,12 +47,12 @@ for switch in switches:
 pprint(output_list)
 print(len(output_list))
 
-
 output_map = {}
+
 
 for output in output_list:
     hostname_regex = re.findall(r".+\d\d:\d\d:\d\d\s(.+?)\s", output)
-    # pprint(hostname_regex)
+    pprint(hostname_regex)
     hostname = hostname_regex[0]
 
     output_lines = output.split("\n")
