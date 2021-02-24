@@ -13,7 +13,7 @@ def ospf_func(ip):
     nbriplist = []
     ospf_device = {}
 
-    session = Session(hostname = ip, version = 3, security_level = "auth_with_privacy", security_username = "gbenga", auth_protocol="SHA", auth_password="shapass1234", privacy_protocol="AES", privacy_password="aespass1234")
+    session = Session(hostname = ip, version = 3, security_level = "auth_with_privacy", security_username = "steve", auth_protocol="SHA", auth_password="shapass1234", privacy_protocol="AES", privacy_password="aespass1234")
     snmp_walk = session.walk('.1.3.6.1.2.1.14.1.1')
     # pprint(snmp_walk)
     ospf_host_id = snmp_walk[0].value
@@ -43,7 +43,7 @@ def ospf_func(ip):
     return ospf
 
 ospf = ospf_func(ip)
-pprint(ospf)
+# pprint(ospf)
 # print(len(ospf))
 
 def neighbor_query():
@@ -54,14 +54,14 @@ def neighbor_query():
         rtr_id = ospf[router]["HostID"]
         all_rtr_ids.append(rtr_id)
 
-    pprint(all_rtr_ids)
+    # pprint(all_rtr_ids)
 
     all_nbr_ids = []
     for router in range(len(ospf)):
         for nbr_id in ospf[router]["NbrRtrID"]:
             all_nbr_ids.append(nbr_id)
 
-    pprint(all_nbr_ids)
+    # pprint(all_nbr_ids)
 
     all_unqueried = []
     for nbr_id in all_nbr_ids:
@@ -77,7 +77,7 @@ def neighbor_query():
             for index, s in enumerate(ospf[r]["NbrRtrID"]):
                 if q == s:
                     new_ip_to_query = ospf[r]["NbrRtrIP"][index]
-                    ospf = ospf_func(new_ip_to_query)
+                    ospf_func(new_ip_to_query)
                 else:
                     pass
     pprint(ospf)
@@ -96,7 +96,7 @@ while True:
         break
 
 final_devices_list = neighbor_query()[2]
-pprint(final_devices_list)
+# pprint(final_devices_list)
 
 #Creating list of neighborships
 neighborship_dict = {}
@@ -106,7 +106,7 @@ for each_dictionary in final_devices_list:
         each_tuple = (each_dictionary["HostID"], each_neighbor)
         neighborship_dict[each_tuple] = each_dictionary["NbrRtrIP"][index]
 
-pprint(neighborship_dict)
+# pprint(neighborship_dict)
 
 print("\nGenerating OSPF network topology...\n")
 
