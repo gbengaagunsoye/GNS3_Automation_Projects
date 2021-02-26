@@ -2,7 +2,7 @@
 import logging
 import subprocess
 import re
-# import sys
+import sys
 
 try:
     from scapy.all import *
@@ -28,7 +28,7 @@ print(interfaces)
 for interface in interfaces:
     if interface != "lo":
         hw = get_if_raw_hwaddr(interface)[1]
-        # print(hw)
+        print(hw)
 
         dhcp_discover = Ether(dst = "ff:ff:ff:ff:ff:ff") / IP(src="0.0.0.0", dst="255.255.255.255") / UDP(sport = 68, dport = 67) / BOOTP(chaddr = hw) / DHCP(options = [("message-type", "discover"), "end"])
 
@@ -37,7 +37,7 @@ for interface in interfaces:
         mac_ip = {}
 
         for pair in ans:
-            # print(pair)
+            print(pair)
             mac_ip[pair[1][Ether].src] = pair[1][IP].src
 
         if ans:
